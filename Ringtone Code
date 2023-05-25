@@ -1,0 +1,69 @@
+import simplegui
+
+x = 100
+y = 100
+r = 0
+g = 0
+b = 0
+a = 200
+k = 300
+
+def draw_handler(canvas):
+    global x
+    global y
+    global k
+    global a
+    color = "yellow"
+    
+    x=x+1
+    if (x>= 1000):
+        x=50
+        
+    #grass
+    canvas.draw_polygon([(1200, 1200), (1200, 370), (0, 370), (0, 1200)], 5, "forestgreen", "forestgreen")
+    
+    #sky
+    canvas.draw_polygon([(0,0), (1200, 0), (1200, 370), (0,370)], 5, "lightblue", "lightblue")
+ 
+    #sun (moving)
+    canvas.draw_circle((x, 30), 35, 1, color, color)
+    
+    #person
+    canvas.draw_circle((100, 200), 30, 1, 'tan', 'tan')
+    #body
+    canvas.draw_line((100, 315), (100, 230), 2.5, 'tan')
+    
+    k=k+5
+    if (k>= 160):
+        k=15
+        
+    #right leg (moving)
+    canvas.draw_line((100, 315), (k, 380), 2.5, 'tan')
+    
+    #left leg
+    canvas.draw_line((70, 380), (100, 315), 2.5, 'tan')
+
+    #arms
+    canvas.draw_line((150, 270), (100, 280), 2.5, 'tan')
+    canvas.draw_line((50, 270), (100, 280), 2.5, 'tan')
+    
+    a=a+8
+    if(a>=315):
+        a=15
+        
+    #ball
+    canvas.draw_circle((a, 400), 20, 1, "black", "purple")
+    canvas.draw_circle((a, 400), 10, 1, "black", "grey")
+    
+    #house
+    canvas.draw_polygon([(400, 275), (600, 275), (600, 475), (400, 475)], 5, "red", "red")
+    canvas.draw_polygon([(400, 275), (600, 275), (500, 150)], 5, "black", "black")
+    canvas.draw_polygon([(455, 475), (515, 475), (515, 380), (455, 380)], 5, "black")
+    canvas.draw_circle((505, 425), 1, 8, "black", 'white')
+
+
+
+frame = simplegui.create_frame('Story', 600, 600)
+frame.set_canvas_background("White")
+frame.set_draw_handler(draw_handler)
+frame.start()
